@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pydevsup documentation &#8212; pyDevSup 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="pyDevSup 0.2 documentation" href="#" />
+    <link rel="next" title="Getting Started" href="gettingstarted.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gettingstarted.html" title="Getting Started"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pyDevSup 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pydevsup-documentation">
+<h1>pydevsup documentation<a class="headerlink" href="#pydevsup-documentation" title="Permalink to this headline">¶</a></h1>
+<p><em>pyDevSup</em> is a means of writing EPICS device support code in Python.</p>
+<p>It currently supports EPICS &gt;=3.14.11 and python versions: 2.6, 2.7, and 3.2.
+The numpy package is also required.</p>
+<p>The source can be found at <a class="reference external" href="http://github.com/mdavidsaver/pyDevSup">http://github.com/mdavidsaver/pyDevSup</a></p>
+<p>File releases are available at <a class="reference external" href="http://sourceforge.net/projects/epics/files/pyDevSup">http://sourceforge.net/projects/epics/files/pyDevSup</a></p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#counter">Counter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#additional-examples-and-applications">Additional examples and applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Runtime Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#pythonpath">PYTHONPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html#build-environment">Build Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#include-pydevsup-in-your-ioc">Include pyDevSup in your IOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#installing-py-files">Installing .py files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#building-extensions">Building extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#installing-for-several-python-versions">Installing for several Python versions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devsup.html">devsup Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="devsup.html#module-devsup.db"><code class="docutils literal"><span class="pre">db</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devsup.html#record-class"><code class="docutils literal"><span class="pre">Record</span></code> Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devsup.html#field-class"><code class="docutils literal"><span class="pre">Field</span></code> Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devsup.html#module-devsup.hooks"><code class="docutils literal"><span class="pre">hooks</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devsup.html#module-devsup.util"><code class="docutils literal"><span class="pre">util</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devsup.html#module-devsup.disect"><code class="docutils literal"><span class="pre">disect</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">Support Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html#build-function"><code class="docutils literal"><span class="pre">build()</span></code> Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html#devicesupport-interface"><code class="docutils literal"><span class="pre">DeviceSupport</span></code> Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ptable.html">ptable Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ptable.html#defining-parameters">Defining Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ptable.html#runtime-access">Runtime Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ptable.html#device-support">Device Support</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="release-history">
+<h2>Release History<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>v0.2 (June 2014)</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Initial release</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pydevsup documentation</a><ul>
+<li><a class="reference internal" href="#release-history">Release History</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gettingstarted.html"
+                        title="next chapter">Getting Started</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gettingstarted.html" title="Getting Started"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pyDevSup 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013, Michael Davidsaver.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
+    </div>
+  </body>
+</html>

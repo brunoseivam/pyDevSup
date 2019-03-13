@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &#8212; pyDevSup 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="pyDevSup 0.2 documentation" href="index.html" />
+    <link rel="next" title="Runtime Environment" href="environment.html" />
+    <link rel="prev" title="pydevsup documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="environment.html" title="Runtime Environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="pydevsup documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyDevSup 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="counter">
+<h2>Counter<a class="headerlink" href="#counter" title="Permalink to this headline">¶</a></h2>
+<p>Consider a simple EPICS database with one record.  Call it <a class="reference download internal" href="_downloads/cntrec.db" download=""><code class="xref download docutils literal"><span class="pre">cntrec.db</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">record</span><span class="p">(</span><span class="n">longin</span><span class="p">,</span> <span class="s2">&quot;test:count&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">field</span><span class="p">(</span><span class="n">DTYP</span><span class="p">,</span> <span class="s2">&quot;Python Device&quot;</span><span class="p">)</span>
+    <span class="n">field</span><span class="p">(</span><span class="n">INP</span> <span class="p">,</span> <span class="s2">&quot;@cntmod&quot;</span><span class="p">)</span>
+    <span class="n">field</span><span class="p">(</span><span class="n">SCAN</span><span class="p">,</span> <span class="s2">&quot;1 second&quot;</span><span class="p">)</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+<p>This is creating a single record which will use the &#8220;Python Device&#8221; support code (aka this package).
+It will attempt to scan (call the process method) one a second.
+The <em>INP</em> field is parsed and the first work identifies the Python module which will provide
+the logic behind this record (everything after the first word is passed to the module <a class="reference internal" href="interfaces.html#build" title="build"><code class="xref py py-func docutils literal"><span class="pre">build()</span></code></a> function.</p>
+<p>Now create <a class="reference download internal" href="_downloads/cntmod.py" download=""><code class="xref download docutils literal"><span class="pre">cntmod.py</span></code></a> with the following.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySupport</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">link</span><span class="p">):</span>
+    <span class="k">pass</span>
+  <span class="k">def</span> <span class="nf">detach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rec</span><span class="p">):</span>
+    <span class="k">pass</span>
+  <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+    <span class="n">rec</span><span class="o">.</span><span class="n">VAL</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">VAL</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">build</span> <span class="o">=</span> <span class="n">MySupport</span>
+</pre></div>
+</div>
+<p>This module is expected to provide a special callable <a class="reference internal" href="interfaces.html#build" title="build"><code class="xref py py-func docutils literal"><span class="pre">build()</span></code></a>.
+We also provide a constructor and method <a class="reference internal" href="interfaces.html#DeviceSupport.detach" title="DeviceSupport.detach"><code class="xref py py-meth docutils literal"><span class="pre">detach</span></code></a>
+which don&#8217;t do anything.
+The <a class="reference internal" href="interfaces.html#DeviceSupport.process" title="DeviceSupport.process"><code class="xref py py-meth docutils literal"><span class="pre">process</span></code></a> method increments the <em>VAL</em> field of the attached <a class="reference internal" href="devsup.html#devsup.db.Record" title="devsup.db.Record"><code class="xref py py-class docutils literal"><span class="pre">Record</span></code></a>.</p>
+<p>Start this IOC with.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./bin/linux-x86_64/softIocPy2.7 -d cntrec.db
+Starting iocInit
+...
+iocRun: All initialization complete
+epics&gt;dbl
+test:count
+epics&gt;
+</pre></div>
+</div>
+<p>Now in another terminal run.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ camonitor test:count
+...
+test:count                     2014-06-16 16:48:22.891825 9
+test:count                     2014-06-16 16:48:23.891967 10
+test:count                     2014-06-16 16:48:24.892137 11
+test:count                     2014-06-16 16:48:25.892286 12
+</pre></div>
+</div>
+<p>It may be necessary to run <em>export EPICS_CA_ADDR_LIST=localhost</em> first.</p>
+</div>
+<div class="section" id="additional-examples-and-applications">
+<h2>Additional examples and applications<a class="headerlink" href="#additional-examples-and-applications" title="Permalink to this headline">¶</a></h2>
+<p>This module comes with several examples in <em>testApp</em> as well as three complete applications.</p>
+<dl class="docutils">
+<dt>logApp</dt>
+<dd>Observes a line based text file as new lines are appended.
+Writes each line to a charactor array PV.
+Special handling of caPutLog files.</dd>
+<dt>pidMonApp</dt>
+<dd>Monitors the PID file created by a UNIX daemon.</dd>
+<dt>weatherApp</dt>
+<dd>Retreives weather reports via the <em>pymetar</em> module.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#counter">Counter</a></li>
+<li><a class="reference internal" href="#additional-examples-and-applications">Additional examples and applications</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">pydevsup documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="environment.html"
+                        title="next chapter">Runtime Environment</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gettingstarted.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="environment.html" title="Runtime Environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="pydevsup documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyDevSup 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013, Michael Davidsaver.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
+    </div>
+  </body>
+</html>
